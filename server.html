@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/backbone-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+//1.将数据或者更新的数据保存到服务器上
+//	Backbone.sync=function(method,model){
+//		alert(method + ": " + JSON.stringify(model));
+//	model.set('id', 1);
+//	}
+//	var M=Backbone.Model.extend({
+//		defaults:{
+//			'name':'lili',
+//		},
+//		url:'/user'     //此处一定要写服务器地址
+//	});
+//	var m=new M();
+//	m.save();
+//	m.save('name','haha');
+
+//2.从服务器上获取数据,一般都是从集合中取值,等从服务器取值完毕后,开始渲染页面
+Backbone.sync=function(method,model){
+		alert(method + ": " + JSON.stringify(model));
+	model.set('id', 1);
+}
+var C=Backbone.Collection.extend({
+	initialize:function(){
+		this.on('reset',function(){  //从服务器获取完毕后会执行此函数，但是本测试中url是假连接
+			alert("从服务器拉取值完毕");
+		})
+	},
+	url:'/user',
+})
+var c=new C();
+c.fetch();
+
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/backbone-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	//适用于单页面跳转
+	var W=Backbone.Router.extend({
+		routes: {
+	    "help":                 "help",    // #help
+	    "search/:query":        "search",  // #search/kiwis
+	    "search/:query/p:page": "search"   // #search/kiwis/p7
+	  },
+	
+	  help: function() {
+	    alert("您打开的是help");
+	  },
+	
+	  search: function(query, page) {
+	    alert("您打开的是search");
+	  }
+	});
+	var w=new W();
+	Backbone.history.start();//此处必须开启Backbone的路由历史管理
+</script>
+</head>
+<body>
+</body>
+</html>

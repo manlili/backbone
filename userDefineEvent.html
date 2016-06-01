@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/backbone-min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+//一、触发自定义事件
+//var M=Backbone.Model.extend({
+//	defaults:{'name':'lili'},
+//	initialize:{  //初始化构造函数
+//		this.on('change',function(){  
+//			alert("默认参数被改变");
+//		})
+//	}
+//})
+//var m=new M();
+//m.set('name','haha');
+
+
+//二、触发自定义事件中固定属性
+//var M=Backbone.Model.extend({
+//	defaults:{'name':'lili'},
+//	initialize:function(){
+//		this.on('change:name',function(model){
+//			alert("默认参数被改变");
+//			console.log(model)
+//		})
+//	}
+//})
+//var m=new M();
+//m.set('name','haha');
+
+
+//三、view和MVC模式
+$(function(){
+	var M=Backbone.Model.extend({
+		defaults:{'name':'lili'},
+	});
+	var V=Backbone.View.extend({
+		initialize: function() {
+    	this.listenTo(this.model, "change", this.render);
+  	},
+	  render: function() {
+	    alert("默认参数被改变");
+	  }
+	});
+	var m=new M();
+	var v=new V({model:m});
+	m.set('name','hahah')
+})
+</script>
+</head>
+
+<body>
+</body>
+</html>

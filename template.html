@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/backbone-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+//前端模板：主要是控制JS与html分离
+//1.js与html混合代码如下:
+//$(function(){
+//
+//	var M = Backbone.Model.extend({
+//		defaults : {
+//			name : 'hello'
+//		}
+//	});
+//	
+//	var V = Backbone.View.extend({
+//			
+//		initialize : function(){
+//			
+//			this.listenTo( this.model , 'change' , this.show );
+//			
+//		},
+//		show : function(model){
+//			$('body').append( '<div>'+ model.get('name') +'</div>' );
+//		}
+//		
+//	});	
+//	
+//	var m = new M;
+//	var v = new V({model:m});
+//	m.set('name','hi');
+//
+//});
+
+//2.JS与html分离代码如下(需配合body中template)：
+$(function(){
+
+	var M = Backbone.Model.extend({
+		defaults : {
+			name : 'hello'
+		}
+	});
+	
+	var V = Backbone.View.extend({
+			
+		initialize : function(){
+			
+			this.listenTo( this.model , 'change' , this.show );
+			
+		},
+		show : function(model){
+			$('body').append( this.template(this.model.toJSON()) );
+		},
+		template:_.template($("#template").html()),    //此处用的是underscoreJS里面的_.template方法
+		
+	});	
+	
+	var m = new M;
+	var v = new V({model:m});
+	m.set('name','hi');
+
+});
+	
+
+</script>
+</head>
+<body>
+	<!--<script type="text/template" id="template">
+		<div><%=name%></div>
+	</script>-->
+	<script type="text/template" id="template">
+		<%var i=0;
+		for(i=0;i<=3;i++){%>
+			<div><%=name%></div>
+		<%}%>
+		
+	</script>
+</body>
+</html>

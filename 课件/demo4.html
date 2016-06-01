@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="jquery-2.0.3.min.js"></script>
+<script src="underscore-min.js"></script>
+<script src="backbone-min.js"></script>
+<script>
+
+//Backbone.sync = function(method, model) {
+//	  alert(method + ": " + JSON.stringify(model));
+//	  model.id = 1;
+//};
+//
+//var M = Backbone.Model.extend({
+//	defaults : {
+//		name : 'hello'
+//	},
+//	url : '/user'
+//});
+//
+//var m = new M;
+//m.save();
+//m.save({name : 'hi'});
+
+
+
+
+
+
+
+
+
+Backbone.sync = function(method, model) {
+	  alert(method + ": " + JSON.stringify(model));
+};
+
+var C = Backbone.Collection.extend({
+	initialize : function(){
+		this.on('reset',function(){
+			alert(123);
+		});
+	}, 
+	url: '/users'
+});
+
+var models = new C;
+models.fetch();
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

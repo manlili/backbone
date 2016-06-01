@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="jquery-2.0.3.min.js"></script>
+<script src="underscore-min.js"></script>
+<script src="backbone-min.js"></script>
+<script>
+
+//var M = Backbone.Model.extend({
+//	defaults : {
+//		name : 'hello'
+//	},
+//	initialize : function(){  //初始化构造函数
+//		
+//		this.on('change',function(){
+//			alert(123);
+//		});
+//		
+//	}
+//});
+//
+//var model = new M;
+//model.set('name','hi');
+
+
+
+
+
+
+
+//var M = Backbone.Model.extend({
+//	defaults : {
+//		name : 'hello'
+//	},
+//	initialize : function(){  //初始化构造函数
+//		
+//		this.on('change:name',function(model){
+//			
+//			console.log(model);
+//			
+//		});
+//		
+//	}
+//});
+//
+//var model = new M;
+//model.set('name','hi');
+
+
+
+
+
+
+
+$(function(){
+
+	var M = Backbone.Model.extend({
+		defaults : {
+			name : 'hello'
+		}
+	});
+	
+	var V = Backbone.View.extend({
+			
+		initialize : function(){
+			
+			this.listenTo( this.model , 'change' , this.show );
+			
+		},
+		show : function(model){
+			$('body').append( '<div>'+ model.get('name') +'</div>' );
+		}
+		
+	});
+	
+	
+	var m = new M;
+	var v = new V({model:m});
+	m.set('name','hi');
+
+});
+
+
+
+
+
+
+
+
+//var model = new Backbone.Model();
+//
+//var C = Backbone.Collection.extend({
+//	initialize : function(){
+//
+//		this.on('add',function(){
+//			alert(123);
+//		});
+//		
+//	}
+//});
+//
+//var models = new C;
+//models.add( model );
+
+</script>
+</head>
+
+<body>
+</body>
+</html>
